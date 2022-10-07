@@ -1,11 +1,12 @@
 #include "BigDecimalInt.h"
+
 bool mark = true;
+
 BigDecimalInt::BigDecimalInt(string decStr)
 {
 	// TODO: 000005656565 remove zeros until number bigger than 0 //done
 	// TODO: + / - remove signs in the begin of string //done
-	// TODO: use stoi
-	// TODO: push the remaining into num vector
+	// TODO: push the remaining into num vector //done
 	/*
 	TODO: use this old code
 	// removing the spaces from the text to the end of it, then returning a pointer to the beginning of the removed spaces
@@ -15,10 +16,11 @@ BigDecimalInt::BigDecimalInt(string decStr)
 	*/
 	int cursor = 0;
 	bool streak = true;
+
 	if (decStr[0] == '+' || decStr[0] == '-')
 	{
 		mark = false;
-		;
+		
 		str_sign = decStr[0];
 		// Erasing the first character in the String
 		// Where 0 is the first character index, 1 is the number of characters we need to remove from that index.
@@ -30,7 +32,13 @@ BigDecimalInt::BigDecimalInt(string decStr)
 		return;
 	}
 
-	for (int i = 1; i < decStr.size(); ++i)
+	if (decStr == "0")
+	{
+		num.push_back(0);
+		return;
+	}
+
+	for (int i = 0; i < decStr.size(); ++i)
 	{
 		if (!isdigit(decStr[i]))
 		{
@@ -47,12 +55,108 @@ BigDecimalInt::BigDecimalInt(string decStr)
 			streak = false;
 		}
 	}
+
+	if (cursor > 0)
+	{
+		// Erasing zeros from the beginning of the string, "cursor" of times
+		decStr.erase(0,cursor);
+	}
+
 	str = decStr;
+
+	for (int i = decStr.size() - 1; i >= 0; --i)
+	{
+		num.push_back((int)decStr[i] - (int)'0');
+	}
+}
+
+BigDecimalInt::BigDecimalInt(int decInt)
+{	
+	string decStr = to_string(decInt);
+	
+	if (decStr[0] == '+' || decStr[0] == '-')
+	{
+		mark = false;
+		
+		str_sign = decStr[0];
+		// Erasing the first character in the String
+		// Where 0 is the first character index, 1 is the number of characters we need to remove from that index.
+		decStr.erase(0, 1);
+	}
+
+	str = decStr;
+
+	for (int i = decStr.size() - 1; i >= 0; --i)
+	{
+		num.push_back((int)decStr[i] - (int)'0');
+	}
+}
+
+void BigDecimalInt::show()
+{
+	cout << str_sign;
+
+	for (int i = num.size() - 1; i >= 0; --i)
+	{
+		cout << num[i];
+	}
 }
 
 string BigDecimalInt::get_str()
 {
 	return str;
+}
+
+BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
+{
+	cout << "HHello";
+	vector<int> res(0, 5);
+	// vec[1,2,1] -> 121 , vec[1,9,2] -> 291
+	//  121
+	//+ 291
+	//  (3+1)12 -> 412
+	int shortest;
+	string result;
+
+	if (num.size() < secondDec.num.size())
+	{
+		shortest = num.size();
+	}
+	else
+	{
+		shortest = secondDec.num.size();
+	}
+
+	if(str_sign == '+' && secondDec.str_sign == '+')
+	{
+		for(int i = 0; i < shortest; ++i)
+		{
+			
+			result = to_string(num[i] + secondDec.num[i]);
+			// res[0] = 1;
+			// cout << res[0]; //tosolve...
+			if (result.size() > 1)
+			{
+				res[i] = ( (int)result[1] - (int)'0' );
+				res[i+1] = ( (int)result[0] - (int)'0' );
+			}
+			else
+			{
+				res[i] = ( (int) result[0] - (int) '0' );
+			}
+			
+		}	
+		
+	}
+	
+	string holder = "";
+	for (int i = res.size() - 1; i >= 0; --i)
+	{
+		cout << "hello";
+		cout << res[i];
+		holder += to_string(res[i]);
+	}
+	return BigDecimalInt(holder);
 }
 
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
@@ -68,6 +172,7 @@ bool BigDecimalInt::operator==(BigDecimalInt secondDec)
 BigDecimalInt BigDecimalInt::operator=(BigDecimalInt secondDec)
 {
 	str = secondDec.get_str();
+	return BigDecimalInt(str);
 }
 
 int BigDecimalInt::size()
@@ -79,11 +184,16 @@ int BigDecimalInt::sign()
 {
 	if (str_sign == '+')
 	{
-		return (+1);
+		return 1;
 	}
 	else if (str_sign == '-')
 	{
-		return (-1);
+		return -1;
+	}
+	else
+	{
+		// Must return something in any case
+		return 0;
 	}
 }
 
