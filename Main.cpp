@@ -3,13 +3,21 @@
 int main()
 {
 
+ /*
+  99
+   2
+  11
+  101
+ */
 
-    BigDecimalInt num1("55");
-    BigDecimalInt num2("66");
+
+
+    BigDecimalInt num1("999");
+    BigDecimalInt num2("22");
 
     BigDecimalInt num3("5"); 
 
-    (num1+num3).show();
+    (num1+num2).show();
 
 
 

@@ -94,8 +94,6 @@ BigDecimalInt::BigDecimalInt(int decInt)
 
 void BigDecimalInt::show()
 {
-	cout << str_sign;
-
 	for (int i = num.size() - 1; i >= 0; --i)
 	{
 		cout << num[i];
@@ -109,53 +107,67 @@ string BigDecimalInt::get_str()
 
 BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 {
-	cout << "HHello";
-	vector<int> res(0, 5);
+	
 	// vec[1,2,1] -> 121 , vec[1,9,2] -> 291
 	//  121
 	//+ 291
 	//  (3+1)12 -> 412
-	int shortest;
 	string result;
+	int size;
 
-	if (num.size() < secondDec.num.size())
+	// Make Both number at the same size
+	while (num.size() < secondDec.num.size() || secondDec.num.size() < num.size())
 	{
-		shortest = num.size();
+		if (num.size() < secondDec.num.size())
+		{
+			num.push_back(0);
+		}
+		else if (secondDec.num.size() < num.size())
+		{
+			secondDec.num.push_back(0);
+		}
 	}
-	else
-	{
-		shortest = secondDec.num.size();
-	}
+	// make a place for carries just in case
+	num.push_back(0);
+	secondDec.num.push_back(0);
 
+	// size of numbers to loop into it
+	size = num.size();
+
+	// Array to store the result
+	int res[size];
+	// fill array with zeros
+	fill(res, res+size, 0);
+	
 	if(str_sign == '+' && secondDec.str_sign == '+')
 	{
-		for(int i = 0; i < shortest; ++i)
+		for(int i = 0; i < size; ++i)
 		{
-			
 			result = to_string(num[i] + secondDec.num[i]);
-			// res[0] = 1;
-			// cout << res[0]; //tosolve...
+			// If result > 9 so we need to make carrier into the next element
 			if (result.size() > 1)
 			{
-				res[i] = ( (int)result[1] - (int)'0' );
-				res[i+1] = ( (int)result[0] - (int)'0' );
+				// Ones position of the result will be in the current index 
+				res[i] += ( (int)result[1] - (int)'0' );
+				// Tens position of the result will be in the next index
+				res[i+1] += ( (int)result[0] - (int)'0' );
 			}
+			// If result < 9 so we just plusing the result with the number in current index
 			else
 			{
-				res[i] = ( (int) result[0] - (int) '0' );
+				res[i] += ( (int) result[0] - (int) '0' );
 			}
-			
 		}	
-		
 	}
-	
+
+	// String to hold the result 
 	string holder = "";
-	for (int i = res.size() - 1; i >= 0; --i)
+
+	for (int i = size - 1; i >= 0; --i)
 	{
-		cout << "hello";
-		cout << res[i];
 		holder += to_string(res[i]);
 	}
+	// Returning the result in form of BigDecimalInt using string constructor
 	return BigDecimalInt(holder);
 }
 
