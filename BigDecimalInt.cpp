@@ -102,6 +102,10 @@ void BigDecimalInt::show()
 
 string BigDecimalInt::get_str()
 {
+	if (str_sign == '-')
+	{
+		return ("-" + str);
+	}
 	return str;
 }
 
@@ -114,6 +118,7 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 	//  (3+1)12 -> 412
 	string result;
 	int size;
+	bool isNgtiv = false;
 
 	// Make Both number at the same size
 	while (num.size() < secondDec.num.size() || secondDec.num.size() < num.size())
@@ -159,6 +164,47 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 			}
 		}	
 	}
+	else if (str_sign == '+' && secondDec.str_sign == '-')
+	{
+		for(int i = 0; i < size; ++i)
+		{
+            /*
+            Want to flip the larger number to be in first place and just adding -ve sign in the end
+            if (num < secondDec)
+            {
+                vector<int> temp = num;
+                num = secondDec.num;
+                secondDec.num = temp;
+                isNgtiv = true;
+            }
+            */
+			if ((num[i] - secondDec.num[i]) < 0 )
+			{
+				int j = i+1;
+				while(num[j] == 0)
+				{                 // 3999910
+					if (num[j+1] == 0)
+					{
+						num[j] = 9;
+						++j;
+					}
+					else
+					{
+						num[j] = 9;
+						num[j+1]--;
+						num[i] += 10;
+						result = to_string(num[i] - secondDec.num[i]);
+						res[i] = stoi(result);
+					}
+				}	
+			}
+			else 
+			{
+				result = to_string(num[i] - secondDec.num[i]);
+				res[i] = stoi(result);
+			}
+		}
+	}
 
 	// String to hold the result 
 	string holder = "";
@@ -167,6 +213,12 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 	{
 		holder += to_string(res[i]);
 	}
+
+	if (isNgtiv == true)
+	{
+		holder = "-" + holder;
+	}	
+
 	// Returning the result in form of BigDecimalInt using string constructor
 	return BigDecimalInt(holder);
 }
