@@ -10,12 +10,12 @@ int main()
   101
  */
 
-    BigDecimalInt num1("50000");
-    BigDecimalInt num2("-44444");
+    // BigDecimalInt num1("50000");
+    // BigDecimalInt num2("-44444");
 
-    BigDecimalInt num3("5"); 
+    // BigDecimalInt num3("5"); 
 
-    cout << (num1+num2).get_str();
+    // cout << (num1+num2).get_str();
 
 
 
@@ -27,14 +27,14 @@ int main()
     // {
     //     cout << "No\n";
     // }
-    // if (BigDecimalInt("1999") > BigDecimalInt("9"))
-    // {
-    //     cout << "bigger\n";
-    // }
-    // else
-    // {
-    //     cout << "smaller\n";
-    // }
+    if (BigDecimalInt("1999") > BigDecimalInt("9"))
+    {
+        cout << "bigger\n";
+    }
+    else
+    {
+        cout << "smaller\n";
+    }
     // BigDecimalInt x("0");
     // BigDecimalInt c("-789");
     // BigDecimalInt v = c;
