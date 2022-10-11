@@ -168,23 +168,16 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 	{
 		for (int i = 0; i < size; ++i)
 		{
-			/*
-			Want to flip the larger number to be in first place and just adding -ve sign in the end
-			if (num < secondDec)
+			
+			// fliping the larger number to be in first place and just adding -ve sign in the end
+			// 200 + - 500 = 500 - 200 = 300 => -300
+			if (secondDec > BigDecimalInt(str))
 			{
-					vector<int> temp = num;
-					num = secondDec.num;
-					secondDec.num = temp;
-					isNgtiv = true;
+				vector<int> temp = num;
+				num = secondDec.num;
+				secondDec.num = temp;
+				isNgtiv = true;
 			}
-			*/
-			// if ((num[i] - secondDec.num[i]) < 0 )
-			// {
-			// 	vector<int> temp = num;
-			// 	num = secondDec.num;
-			// 	secondDec.num = temp;
-			// 	isNgtiv = true;
-			// }
 		
 			if ((num[i] - secondDec.num[i]) < 0)
 			{
@@ -244,7 +237,7 @@ bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 	{
 		return false;
 	}
-	else if (NumOfDigits1 == NumOfDigits2)
+	else 
 	{
 		return (str > secondDec.get_str());
 	}
