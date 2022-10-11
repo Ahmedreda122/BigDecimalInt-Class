@@ -20,7 +20,7 @@ BigDecimalInt::BigDecimalInt(string decStr)
 	if (decStr[0] == '+' || decStr[0] == '-')
 	{
 		mark = false;
-		
+
 		str_sign = decStr[0];
 		// Erasing the first character in the String
 		// Where 0 is the first character index, 1 is the number of characters we need to remove from that index.
@@ -59,7 +59,7 @@ BigDecimalInt::BigDecimalInt(string decStr)
 	if (cursor > 0)
 	{
 		// Erasing zeros from the beginning of the string, "cursor" of times
-		decStr.erase(0,cursor);
+		decStr.erase(0, cursor);
 	}
 
 	str = decStr;
@@ -71,13 +71,13 @@ BigDecimalInt::BigDecimalInt(string decStr)
 }
 
 BigDecimalInt::BigDecimalInt(int decInt)
-{	
+{
 	string decStr = to_string(decInt);
-	
+
 	if (decStr[0] == '+' || decStr[0] == '-')
 	{
 		mark = false;
-		
+
 		str_sign = decStr[0];
 		// Erasing the first character in the String
 		// Where 0 is the first character index, 1 is the number of characters we need to remove from that index.
@@ -109,9 +109,9 @@ string BigDecimalInt::get_str()
 	return str;
 }
 
-BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
+BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 {
-	
+
 	// vec[1,2,1] -> 121 , vec[1,9,2] -> 291
 	//  121
 	//+ 291
@@ -142,48 +142,48 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 	// Array to store the result
 	int res[size];
 	// fill array with zeros
-	fill(res, res+size, 0);
-	
-	if(str_sign == '+' && secondDec.str_sign == '+')
+	fill(res, res + size, 0);
+
+	if (str_sign == '+' && secondDec.str_sign == '+')
 	{
-		for(int i = 0; i < size; ++i)
+		for (int i = 0; i < size; ++i)
 		{
 			result = to_string(num[i] + secondDec.num[i]);
 			// If result > 9 so we need to make carrier into the next element
 			if (result.size() > 1)
 			{
-				// Ones position of the result will be in the current index 
-				res[i] += ( (int)result[1] - (int)'0' );
+				// Ones position of the result will be in the current index
+				res[i] += ((int)result[1] - (int)'0');
 				// Tens position of the result will be in the next index
-				res[i+1] += ( (int)result[0] - (int)'0' );
+				res[i + 1] += ((int)result[0] - (int)'0');
 			}
 			// If result < 9 so we just plusing the result with the number in current index
 			else
 			{
-				res[i] += ( (int) result[0] - (int) '0' );
+				res[i] += ((int)result[0] - (int)'0');
 			}
-		}	
+		}
 	}
 	else if (str_sign == '+' && secondDec.str_sign == '-')
 	{
-		for(int i = 0; i < size; ++i)
+		for (int i = 0; i < size; ++i)
 		{
-            /*
-            Want to flip the larger number to be in first place and just adding -ve sign in the end
-            if (num < secondDec)
-            {
-                vector<int> temp = num;
-                num = secondDec.num;
-                secondDec.num = temp;
-                isNgtiv = true;
-            }
-            */
-			if ((num[i] - secondDec.num[i]) < 0 )
+			/*
+			Want to flip the larger number to be in first place and just adding -ve sign in the end
+			if (num < secondDec)
 			{
-				int j = i+1;
-				while(num[j] == 0)
-				{                 // 3999910
-					if (num[j+1] == 0)
+				vector<int> temp = num;
+				num = secondDec.num;
+				secondDec.num = temp;
+				isNgtiv = true;
+			}
+			*/
+			if ((num[i] - secondDec.num[i]) < 0)
+			{
+				int j = i + 1;
+				while (num[j] == 0)
+				{ // 3999910
+					if (num[j + 1] == 0)
 					{
 						num[j] = 9;
 						++j;
@@ -191,14 +191,14 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 					else
 					{
 						num[j] = 9;
-						num[j+1]--;
+						num[j + 1]--;
 						num[i] += 10;
 						result = to_string(num[i] - secondDec.num[i]);
 						res[i] = stoi(result);
 					}
-				}	
+				}
 			}
-			else 
+			else
 			{
 				result = to_string(num[i] - secondDec.num[i]);
 				res[i] = stoi(result);
@@ -206,7 +206,7 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 		}
 	}
 
-	// String to hold the result 
+	// String to hold the result
 	string holder = "";
 
 	for (int i = size - 1; i >= 0; --i)
@@ -217,7 +217,7 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 	if (isNgtiv == true)
 	{
 		holder = "-" + holder;
-	}	
+	}
 
 	// Returning the result in form of BigDecimalInt using string constructor
 	return BigDecimalInt(holder);
@@ -225,7 +225,21 @@ BigDecimalInt BigDecimalInt::operator+ (BigDecimalInt secondDec)
 
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 {
-	return (str > secondDec.get_str());
+	int NumOfDigits1 = str.size();
+	int NumOfDigits2 = secondDec.get_str().size();
+
+	if (NumOfDigits1 > NumOfDigits2)
+	{
+		return true;
+	}
+	else if (NumOfDigits1 < NumOfDigits2)
+	{
+		return false;
+	}
+	else if (NumOfDigits1 == NumOfDigits2)
+	{
+		return (str > secondDec.get_str());
+	}
 }
 
 bool BigDecimalInt::operator==(BigDecimalInt secondDec)
