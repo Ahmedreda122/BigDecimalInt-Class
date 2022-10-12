@@ -156,29 +156,29 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 	}
 	else 
 	{
-        /*
-            -550 + 500 => 500 + -550
-            the default is str_sign == '+' && secondDec.str_sign == '-'
-        */ 
-        if (str_sign == '-' && secondDec.str_sign == '+')
-        {
-            vector<int> temp = num;
-            string strTemp = str;
+		/*
+				-550 + 500 => 500 + -550
+				the default is str_sign == '+' && secondDec.str_sign == '-'
+		*/ 
+		if (str_sign == '-' && secondDec.str_sign == '+')
+		{
+				vector<int> temp = num;
+				string strTemp = str;
 
-            num = secondDec.num;
-            str = secondDec.str;
+				num = secondDec.num;
+				str = secondDec.str;
 
-            secondDec.num = temp;
-            secondDec.str = strTemp;
-        }
+				secondDec.num = temp;
+				secondDec.str = strTemp;
+		}
 
-        if (secondDec > BigDecimalInt(str))
-        {
-            vector<int> temp = num;
-            num = secondDec.num;
-            secondDec.num = temp;
-            isNgtiv = true;
-        }
+		if (secondDec > BigDecimalInt(str))
+		{
+				vector<int> temp = num;
+				num = secondDec.num;
+				secondDec.num = temp;
+				isNgtiv = true;
+		}
 
 		for (int i = 0; i < size; ++i)
 		{
@@ -203,6 +203,14 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 						result = to_string(num[i] - secondDec.num[i]);
 						res[i] = stoi(result);
 					}
+				}
+
+				if(num[j] != 0)
+				{
+					num[j]--;
+					num[i] += 10;
+					result = to_string(num[i] - secondDec.num[i]);
+					res[i] = stoi(result);
 				}
 			}
 			else
