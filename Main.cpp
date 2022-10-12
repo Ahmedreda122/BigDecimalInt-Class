@@ -9,9 +9,8 @@ int main()
   11
   101
  */
-
-    BigDecimalInt num1("200");
-    BigDecimalInt num2("-500");
+    BigDecimalInt num1("-600");
+    BigDecimalInt num2("500");
 
     BigDecimalInt num3("5"); 
 

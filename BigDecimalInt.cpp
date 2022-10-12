@@ -4,16 +4,6 @@ bool mark = true;
 
 BigDecimalInt::BigDecimalInt(string decStr)
 {
-	// TODO: 000005656565 remove zeros until number bigger than 0 //done
-	// TODO: + / - remove signs in the begin of string //done
-	// TODO: push the remaining into num vector //done
-	/*
-	TODO: use this old code
-	// removing the spaces from the text to the end of it, then returning a pointer to the beginning of the removed spaces
-	auto removed = remove(txt.begin(), txt.end(), ' ');
-	// Erasing the spaces from the end of the text
-	txt.erase(removed, txt.end());
-	*/
 	int cursor = 0;
 	bool streak = true;
 
@@ -164,21 +154,37 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 			}
 		}
 	}
-	else if (str_sign == '+' && secondDec.str_sign == '-')
+	else 
 	{
+        /*
+            -550 + 500 => 500 + -550
+            the default is str_sign == '+' && secondDec.str_sign == '-'
+        */ 
+        if (str_sign == '-' && secondDec.str_sign == '+')
+        {
+            vector<int> temp = num;
+            string strTemp = str;
+
+            num = secondDec.num;
+            str = secondDec.str;
+
+            secondDec.num = temp;
+            secondDec.str = strTemp;
+        }
+
+        if (secondDec > BigDecimalInt(str))
+        {
+            vector<int> temp = num;
+            num = secondDec.num;
+            secondDec.num = temp;
+            isNgtiv = true;
+        }
+
 		for (int i = 0; i < size; ++i)
 		{
 			
 			// fliping the larger number to be in first place and just adding -ve sign in the end
 			// 200 + - 500 = 500 - 200 = 300 => -300
-			if (secondDec > BigDecimalInt(str))
-			{
-				vector<int> temp = num;
-				num = secondDec.num;
-				secondDec.num = temp;
-				isNgtiv = true;
-			}
-		
 			if ((num[i] - secondDec.num[i]) < 0)
 			{
 				int j = i + 1;
