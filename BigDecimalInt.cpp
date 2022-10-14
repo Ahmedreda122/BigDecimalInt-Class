@@ -92,10 +92,6 @@ void BigDecimalInt::show()
 
 string BigDecimalInt::get_str()
 {
-	if (str_sign == '-')
-	{
-		return ("-" + str);
-	}
 	return str;
 }
 
