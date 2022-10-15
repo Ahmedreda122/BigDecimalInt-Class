@@ -150,35 +150,35 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 			}
 		}
 	}
-	else 
+	else
 	{
 		/*
 				-550 + 500 => 500 + -550
 				the default is str_sign == '+' && secondDec.str_sign == '-'
-		*/ 
+		*/
 		if (str_sign == '-' && secondDec.str_sign == '+')
 		{
-				vector<int> temp = num;
-				string strTemp = str;
+			vector<int> temp = num;
+			string strTemp = str;
 
-				num = secondDec.num;
-				str = secondDec.str;
+			num = secondDec.num;
+			str = secondDec.str;
 
-				secondDec.num = temp;
-				secondDec.str = strTemp;
+			secondDec.num = temp;
+			secondDec.str = strTemp;
 		}
 
 		if (secondDec > BigDecimalInt(str))
 		{
-				vector<int> temp = num;
-				num = secondDec.num;
-				secondDec.num = temp;
-				isNgtiv = true;
+			vector<int> temp = num;
+			num = secondDec.num;
+			secondDec.num = temp;
+			isNgtiv = true;
 		}
 
 		for (int i = 0; i < size; ++i)
 		{
-			
+
 			// fliping the larger number to be in first place and just adding -ve sign in the end
 			// 200 + - 500 = 500 - 200 = 300 => -300
 			if ((num[i] - secondDec.num[i]) < 0)
@@ -201,7 +201,7 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 					}
 				}
 
-				if(num[j] != 0)
+				if (num[j] != 0)
 				{
 					num[j]--;
 					num[i] += 10;
@@ -235,121 +235,120 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 }
 BigDecimalInt BigDecimalInt ::operator-(BigDecimalInt secondDec)
 {
-    string result;
-    int size;
-    bool isNgtiv = false;
+	string result;
+	int size;
+	bool isNgtiv = false;
 	// Make Both number at the same size
-    while(num.size() < secondDec.num.size() ||num.size() > secondDec.num.size())
-    {
-        if(num.size()<secondDec.num.size())
-            num.push_back(0);
-        else if(num.size() > secondDec.num.size())
-            secondDec.num.push_back(0);
-    }
-
-    size = num.size();
-
-    int final[size];
-	//store largest number
-	vector<int>max;
-	//store smallest number
-	vector<int>min;
-    // fill array with zeros
-    fill(final, final + size, 0);
-    // move largest number in max and smallest in min
-	if(num[size-1] >secondDec.num[size-1])
-	   {
-		   for(int i=0;i<size;i++)
-		   {
-		       max[i]=num[i];
-		       min[i]=secondDec.num[i];
-		   }
-		   // if the sign of largest number is nigtv
-		   if(str_sign == '-')
-		   {
-			isNgtiv = true;
-			return BigDecimalInt(str)+secondDec;
-		   }
-		   // if the sign of smallest number is nigtv
-		   if(secondDec.str_sign == '-')
-		   {
-			return BigDecimalInt(str)+secondDec;
-		   }
-		   if(str_sign == '-' && secondDec.str_sign == '-')
-		   {
-			isNgtiv = true;
-		   }
-	   }
-	   
-	if(num[size-1] <secondDec.num[size-1])
-	   {
-		   for(int i=0;i<size;i++)
-		   {
-		       max[i]=secondDec.num[i];
-		       min[i]=num[i];
-		   }
-		   // if the sign of smallest number is nigtv
-		   if(str_sign == '-')
-		   {
-			
-			return BigDecimalInt(str)+secondDec;
-		   }
-		   // if the sign of largest number is nigtv
-		   if(secondDec.str_sign == '-')
-		   {
-			isNgtiv = true;
-			return BigDecimalInt(str)+secondDec;
-		   }
-		   if(str_sign == '-' && secondDec.str_sign == '-')
-		   {
-			isNgtiv = true;
-		   }
-	   }
-	   
-    if((str_sign == '-' && secondDec.str_sign == '-') || (str_sign == '+' && secondDec.str_sign == '+'))
+	while (num.size() < secondDec.num.size() || num.size() > secondDec.num.size())
 	{
-	for(int i=0;i<size;i++)
+		if (num.size() < secondDec.num.size())
+			num.push_back(0);
+		else if (num.size() > secondDec.num.size())
+			secondDec.num.push_back(0);
+	}
+
+	size = num.size();
+
+	int final[size];
+	// store largest number
+	vector<int> max;
+	// store smallest number
+	vector<int> min;
+	// fill array with zeros
+	fill(final, final + size, 0);
+	// move largest number in max and smallest in min
+	if (num[size - 1] > secondDec.num[size - 1])
 	{
-		if(max[i]<min[i])
+		for (int i = 0; i < size; i++)
 		{
-			max[i]+=10;
-			final[i]=max[i]-min[i];
-			int z=i;
-			if(max[i+1]==0)
+			max[i] = num[i];
+			min[i] = secondDec.num[i];
+		}
+		// if the sign of largest number is nigtv
+		if (str_sign == '-')
+		{
+			isNgtiv = true;
+			return BigDecimalInt(str) + secondDec;
+		}
+		// if the sign of smallest number is nigtv
+		if (secondDec.str_sign == '-')
+		{
+			return BigDecimalInt(str) + secondDec;
+		}
+		if (str_sign == '-' && secondDec.str_sign == '-')
+		{
+			isNgtiv = true;
+		}
+	}
+
+	if (num[size - 1] < secondDec.num[size - 1])
+	{
+		for (int i = 0; i < size; i++)
+		{
+			max[i] = secondDec.num[i];
+			min[i] = num[i];
+		}
+		// if the sign of smallest number is nigtv
+		if (str_sign == '-')
+		{
+
+			return BigDecimalInt(str) + secondDec;
+		}
+		// if the sign of largest number is nigtv
+		if (secondDec.str_sign == '-')
+		{
+			isNgtiv = true;
+			return BigDecimalInt(str) + secondDec;
+		}
+		if (str_sign == '-' && secondDec.str_sign == '-')
+		{
+			isNgtiv = true;
+		}
+	}
+
+	if ((str_sign == '-' && secondDec.str_sign == '-') || (str_sign == '+' && secondDec.str_sign == '+'))
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (max[i] < min[i])
 			{
-				// borrow from the next number
-				while(max[z+1]==0 && max[z+1]!='\0')
+				max[i] += 10;
+				final[i] = max[i] - min[i];
+				int z = i;
+				if (max[i + 1] == 0)
 				{
-					max[z+1]=9;
-					z++;
+					// borrow from the next number
+					while (max[z + 1] == 0 && max[z + 1] != '\0')
+					{
+						max[z + 1] = 9;
+						z++;
+					}
+					max[z + 1] -= 1;
 				}
-				max[z+1]-=1;
-
+				else
+					max[i + 1] -= 1;
 			}
+
 			else
-			max[i+1]-=1;
+			{
+				final[i] = max[i] - min[i];
+			}
 		}
-	
-		else
+		// String to hold the result
+		string holder = "";
+
+		for (int i = size - 1; i >= 0; --i)
 		{
-		   final[i]=max[i]-min[i];
+			holder += to_string(final[i]);
 		}
-	}
-    // String to hold the result
-	string holder = "";
 
-	for (int i = size - 1; i >= 0; --i)
-	{
-		holder += to_string(final[i]);
-	}
+		if (isNgtiv == true)
+		{
+			holder = "-" + holder;
+		}
 
-	if (isNgtiv == true)
-	{
-		holder = "-" + holder;
-	}
-
-    // Returning the result in form of BigDecimalInt using string constructor
-	return BigDecimalInt(holder);
+		// Returning the result in form of BigDecimalInt using string constructor
+		return BigDecimalInt(holder);
 	}
 }
 
@@ -357,49 +356,66 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 {
 	int size1 = str.size();
 	int size2 = secondDec.get_str().size();
-	if((str_sign != secondDec.str_sign))
+	if ((str_sign != secondDec.str_sign))
 	{
-		if(str_sign == '-')
-		   return true;
-		else if(secondDec.str_sign == '-')
-		   return false;
+		if (str_sign == '-')
+			return true;
+		else if (secondDec.str_sign == '-')
+			return false;
 	}
-	if((str_sign == secondDec.str_sign))
+	if ((str_sign == secondDec.str_sign))
 	{
-	if(size1 != size2 )
-	{
-		if(size1 > size2)
-		   return false;
-		else if(size2 > size1)
-		   return true;
+		if (size1 != size2)
+		{
+			if (size1 > size2)
+				return false;
+			else if (size2 > size1)
+				return true;
+		}
+		if (size1 == size2)
+		{
+			if (num[size1 - 1] > secondDec.num[size1 - 1])
+				return false;
+			else if (num[size1 - 1] < secondDec.num[size1 - 1])
+				return true;
+		}
 	}
-	if(size1 == size2)
-	{
-		if(num[size1-1] > secondDec.num[size1-1])
-		   return false;
-		else if(num[size1-1] < secondDec.num[size1-1])
-		   return true;
-	}
-	}
-
-
 }
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 {
 	int NumOfDigits1 = str.size();
 	int NumOfDigits2 = secondDec.get_str().size();
-
-	if (NumOfDigits1 > NumOfDigits2)
-	{
-		return true;
-	}
-	else if (NumOfDigits1 < NumOfDigits2)
+	if (str_sign == '-' && secondDec.sign())
 	{
 		return false;
 	}
-	else 
+	else if (secondDec.sign() && str_sign == '-')
+	{
+		return true;
+	}
+	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	{
+		return true;
+	}
+	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	{
+		return false;
+	}
+	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '+' && secondDec.sign())
 	{
 		return (str > secondDec.get_str());
+	}
+	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	{
+		return false;
+	}
+	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	{
+		return true;
+	}
+	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	{
+		return (str < secondDec.get_str());
 	}
 }
 

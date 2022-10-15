@@ -25,6 +25,8 @@ public:
 	void show();
 	string get_str();
 	// int get_int();
+	BigDecimalInt operator-(BigDecimalInt secondDec);
+	bool operator<(BigDecimalInt secondDec);
 	bool operator>(BigDecimalInt secondDec);
 	bool operator==(BigDecimalInt secondDec);
 	BigDecimalInt operator=(BigDecimalInt secondDec);
