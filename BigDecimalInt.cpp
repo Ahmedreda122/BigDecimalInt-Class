@@ -265,13 +265,13 @@ BigDecimalInt BigDecimalInt ::operator-(BigDecimalInt secondDec)
 			min[i] = secondDec.num[i];
 		}
 		// if the sign of largest number is nigtv
-		if (str_sign == '-')
+		if (str_sign == '-' && secondDec.str_sign == ' + ' )
 		{
 			isNgtiv = true;
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of smallest number is nigtv
-		if (secondDec.str_sign == '-')
+		if (secondDec.str_sign == '-'&& str_sign == ' + ')
 		{
 			return BigDecimalInt(str) + secondDec;
 		}
@@ -289,13 +289,13 @@ BigDecimalInt BigDecimalInt ::operator-(BigDecimalInt secondDec)
 			min[i] = num[i];
 		}
 		// if the sign of smallest number is nigtv
-		if (str_sign == '-')
+		if (str_sign == '-' && secondDec.str_sign == '+')
 		{
 
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of largest number is nigtv
-		if (secondDec.str_sign == '-')
+		if (secondDec.str_sign == '-' && str_sign == '+')
 		{
 			isNgtiv = true;
 			return BigDecimalInt(str) + secondDec;
