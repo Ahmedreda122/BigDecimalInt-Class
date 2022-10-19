@@ -156,7 +156,7 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 	}
   else if (str_sign == '-' && secondDec.str_sign == '-')
   {
-    return (BigDecimalInt("-"+str) - BigDecimalInt(secondDec.get_str()));
+    return (BigDecimalInt("-" + str) - BigDecimalInt(secondDec.str));
   }
 	else 
 	{
@@ -176,7 +176,7 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 			secondDec.str = strTemp;
 		}
 
-		if (secondDec > BigDecimalInt(str))
+		if (BigDecimalInt(secondDec.get_str()) > BigDecimalInt(str))
 		{
 			vector<int> temp = num;
 			num = secondDec.num;
@@ -247,6 +247,7 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 {
 	string result;
+  string holder;
 	int size;
 	bool isNgtiv = false;
 	// Make Both number at the same size
@@ -276,15 +277,15 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 			min[i] = secondDec.num[i];
 		}
 		// if the sign of largest number is nigtv
-		if (str_sign == '-' && secondDec.str_sign == ' + ' )
+		if (str_sign == '-' && secondDec.str_sign == '+')
 		{
 			isNgtiv = true;
-			return BigDecimalInt(str) + secondDec;
+			return (BigDecimalInt(str) + secondDec);
 		}
 		// if the sign of smallest number is nigtv
-		if (secondDec.str_sign == '-'&& str_sign == ' + ')
+		if (secondDec.str_sign == '-' && str_sign == '+')
 		{
-			return BigDecimalInt(str) + secondDec;
+			return (BigDecimalInt(str) + secondDec);
 		}
 		if (str_sign == '-' && secondDec.str_sign == '-')
 		{
@@ -302,7 +303,6 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		// if the sign of smallest number is nigtv
 		if (str_sign == '-' && secondDec.str_sign == '+')
 		{
-
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of largest number is nigtv
@@ -346,7 +346,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 			}
 		}
 		// String to hold the result
-		string holder = "";
+		holder = "";
 
 		for (int i = size - 1; i >= 0; --i)
 		{
@@ -357,10 +357,9 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		{
 			holder = "-" + holder;
 		}
-
-		// Returning the result in form of BigDecimalInt using string constructor
-		return BigDecimalInt(holder);
-	}
+    // Returning the result in form of BigDecimalInt using string constructor
+	  return BigDecimalInt(holder);
+	}	
 }
 
 bool BigDecimalInt::operator<(BigDecimalInt secondDec)
@@ -374,7 +373,7 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 		else if (secondDec.str_sign == '-')
 			return false;
 	}
-	if ((str_sign == secondDec.str_sign))
+	else if((str_sign == secondDec.str_sign))
 	{
 		if (size1 != size2)
 		{
@@ -383,7 +382,7 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 			else if (size2 > size1)
 				return true;
 		}
-		if (size1 == size2)
+		else if (size1 == size2)
 		{
 			if (num[size1 - 1] > secondDec.num[size1 - 1])
 				return false;
@@ -391,7 +390,9 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 				return true;
 		}
 	}
+  return false;
 }
+
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 {
 	int NumOfDigits1 = str.size();
@@ -428,6 +429,7 @@ bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 	{
 		return (str < secondDec.get_str());
 	}
+  return false;
 }
 
 bool BigDecimalInt::operator==(BigDecimalInt secondDec)
