@@ -261,33 +261,34 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 
 	size = num.size();
 
-	int final[size];
+	int finalR[size];
 	// store largest number
 	vector<int> max;
 	// store smallest number
 	vector<int> min;
 	// fill array with zeros
-	fill(final, final + size, 0);
+	fill(finalR, finalR + size, 0);
 	
-	 char sign1,sign2;
+	char sign1,sign2;
 	// move largest number in max and smallest in min
-	if (num[size - 1] > secondDec.num[size - 1])
+	//if (num[size - 1] > secondDec.num[size - 1])
+  if (BigDecimalInt(str) > BigDecimalInt(secondDec.str))
 	{
 		for (int i = 0; i < size; i++)
 		{
-			max[i] = num[i];
-			sign1=str_sign;
-			min[i] = secondDec.num[i];
-			sign2=secondDec.str_sign;
+			max.push_back(num[i]);
+			sign1 = str_sign;
+			min.push_back(secondDec.num[i]);
+			sign2 = secondDec.str_sign;
 		}
 		// if the sign of largest number is nigtv
-		if (sign1 == '-' && sign2 == ' + ' )
+		if (sign1 == '-' && sign2 == '+')
 		{
 			isNgtiv = true;
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of smallest number is nigtv
-		if (sign2 == '-'&& sign1 == ' + ')
+		if (sign2 == '-'&& sign1 == '+')
 		{
 			return BigDecimalInt(str) + secondDec;
 		}
@@ -300,15 +301,14 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			max[i] = secondDec.num[i];
-			sign1=secondDec.str_sign;
-			min[i] = num[i];
-			sign2=str_sign;
+			max.push_back(secondDec.num[i]);
+			sign1 = secondDec.str_sign;
+      min.push_back(num[i]);
+			sign2 = str_sign;
 		}
 		// if the sign of smallest number is nigtv
 		if (sign2 == '-' && sign1 == '+')
 		{
-
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of largest number is nigtv
@@ -323,7 +323,6 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		}
 	}
 
-
 	if ((str_sign == '-' && secondDec.str_sign == '-') || (str_sign == '+' && secondDec.str_sign == '+'))
 	{
 		for (int i = 0; i < size; i++)
@@ -331,7 +330,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 			if (max[i] < min[i])
 			{
 				max[i] += 10;
-				final[i] = max[i] - min[i];
+				finalR[i] = max[i] - min[i];
 				int z = i;
 				if (max[i + 1] == 0)
 				{
@@ -349,7 +348,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 
 			else
 			{
-				final[i] = max[i] - min[i];
+				finalR[i] = max[i] - min[i];
 			}
 		}
 		// String to hold the result
@@ -357,16 +356,16 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 
 		for (int i = size - 1; i >= 0; --i)
 		{
-			holder += to_string(final[i]);
+			holder += to_string(finalR[i]);
 		}
 
 		if (isNgtiv == true)
 		{
 			holder = "-" + holder;
 		}
-    // Returning the result in form of BigDecimalInt using string constructor
-	  return BigDecimalInt(holder);
 	}	
+  // Returning the result in form of BigDecimalInt using string constructor
+	return BigDecimalInt(holder);
 }
 
 bool BigDecimalInt::operator<(BigDecimalInt secondDec)
