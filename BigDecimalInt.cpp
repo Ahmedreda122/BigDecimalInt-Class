@@ -292,8 +292,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 			isNgtiv = true;
 		}
 	}
-
-	if (num[size - 1] < secondDec.num[size - 1])
+  else if (num[size - 1] < secondDec.num[size - 1])
 	{
 		for (int i = 0; i < size; i++)
 		{
@@ -337,7 +336,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 					max[z + 1] -= 1;
 				}
 				else
-					max[i + 1] -= 1;
+          max[i + 1] -= 1;
 			}
 
 			else

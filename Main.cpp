@@ -5,7 +5,7 @@ int main()
   cout << "hello";
   BigDecimalInt num1("555");
   BigDecimalInt num2("1000");
-  //cout << num1-num2;
+  cout << num2-num1;
 
     if (num1.get_str() == "364")
     {
