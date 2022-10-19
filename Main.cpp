@@ -2,11 +2,11 @@
 
 int main()
 {
-  cout << "hello";
-  BigDecimalInt num1("-777");
-  BigDecimalInt num2("-456");
+  //cout << "hello";
+  BigDecimalInt num1("364");
+  BigDecimalInt num2("-194");
 
-  cout << num1 + num2 << endl;
+  cout << num1 - num2 << endl;
 
     if (num1.get_str() == "364")
     {

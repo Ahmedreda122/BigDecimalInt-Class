@@ -250,6 +250,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
   string holder;
 	int size;
 	bool isNgtiv = false;
+
 	// Make Both number at the same size
 	while (num.size() < secondDec.num.size() || num.size() > secondDec.num.size())
 	{
@@ -271,7 +272,6 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 	
 	char sign1,sign2;
 	// move largest number in max and smallest in min
-	//if (num[size - 1] > secondDec.num[size - 1])
   if (BigDecimalInt(str) > BigDecimalInt(secondDec.str))
 	{
 		for (int i = 0; i < size; i++)
@@ -284,20 +284,24 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		// if the sign of largest number is nigtv
 		if (sign1 == '-' && sign2 == '+')
 		{
+      // -500 - 200
 			isNgtiv = true;
-			return BigDecimalInt(str) + secondDec;
+      auto result = BigDecimalInt(str) + secondDec;
+      result.str_sign = '-';
+      return result;
 		}
 		// if the sign of smallest number is nigtv
 		if (sign2 == '-'&& sign1 == '+')
 		{
-			return BigDecimalInt(str) + secondDec;
+      // 500 -- 200
+			return BigDecimalInt(str) + BigDecimalInt(secondDec.str);
 		}
 		if (sign1 == '-' && sign2 == '-')
 		{
 			isNgtiv = true;
 		}
 	}
-  else if (num[size - 1] < secondDec.num[size - 1])
+  else if (BigDecimalInt(str) < BigDecimalInt(secondDec.str))
 	{
 		for (int i = 0; i < size; i++)
 		{
@@ -309,13 +313,17 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		// if the sign of smallest number is nigtv
 		if (sign2 == '-' && sign1 == '+')
 		{
+      //- 200 - 500
+      auto result = BigDecimalInt(str) + secondDec;
+      result.str_sign = '-';
+      return result;
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of largest number is nigtv
 		if (sign1 == '-' && sign2 == '+')
 		{
-			isNgtiv = true;
-			return BigDecimalInt(str) + secondDec;
+      //200 - - 500
+      return BigDecimalInt(str) + BigDecimalInt(secondDec.str);
 		}
 		if (sign2 == '-' && sign1 == '-')
 		{
