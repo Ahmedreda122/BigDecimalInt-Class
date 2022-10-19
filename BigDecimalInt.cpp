@@ -268,26 +268,30 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 	vector<int> min;
 	// fill array with zeros
 	fill(final, final + size, 0);
+	
+	 char sign1,sign2;
 	// move largest number in max and smallest in min
 	if (num[size - 1] > secondDec.num[size - 1])
 	{
 		for (int i = 0; i < size; i++)
 		{
 			max[i] = num[i];
+			sign1=str_sign;
 			min[i] = secondDec.num[i];
+			sign2=secondDec.str_sign;
 		}
 		// if the sign of largest number is nigtv
-		if (str_sign == '-' && secondDec.str_sign == '+')
+		if (sign1 == '-' && sign2 == ' + ' )
 		{
 			isNgtiv = true;
-			return (BigDecimalInt(str) + secondDec);
+			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of smallest number is nigtv
-		if (secondDec.str_sign == '-' && str_sign == '+')
+		if (sign2 == '-'&& sign1 == ' + ')
 		{
-			return (BigDecimalInt(str) + secondDec);
+			return BigDecimalInt(str) + secondDec;
 		}
-		if (str_sign == '-' && secondDec.str_sign == '-')
+		if (sign1 == '-' && sign2 == '-')
 		{
 			isNgtiv = true;
 		}
@@ -297,24 +301,28 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		for (int i = 0; i < size; i++)
 		{
 			max[i] = secondDec.num[i];
+			sign1=secondDec.str_sign;
 			min[i] = num[i];
+			sign2=str_sign;
 		}
 		// if the sign of smallest number is nigtv
-		if (str_sign == '-' && secondDec.str_sign == '+')
+		if (sign2 == '-' && sign1 == '+')
 		{
+
 			return BigDecimalInt(str) + secondDec;
 		}
 		// if the sign of largest number is nigtv
-		if (secondDec.str_sign == '-' && str_sign == '+')
+		if (sign1 == '-' && sign2 == '+')
 		{
 			isNgtiv = true;
 			return BigDecimalInt(str) + secondDec;
 		}
-		if (str_sign == '-' && secondDec.str_sign == '-')
+		if (sign2 == '-' && sign1 == '-')
 		{
 			isNgtiv = true;
 		}
 	}
+
 
 	if ((str_sign == '-' && secondDec.str_sign == '-') || (str_sign == '+' && secondDec.str_sign == '+'))
 	{
