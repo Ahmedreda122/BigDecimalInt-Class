@@ -391,10 +391,14 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 	{
 		if (size1 != size2)
 		{
-			if (size1 > size2)
+			if ((size1 > size2) && (str_sign == '+'))
 				return false;
-			else if (size2 > size1)
+			else if ((size2 > size1) && (str_sign == '+'))
 				return true;
+			else if ((size1 > size2) && (str_sign == '-'))
+				return true;
+			else if ((size1 < size2) && (str_sign == '-'))
+				return false;
 		}
 		else if (size1 == size2)
 		{

@@ -52,19 +52,19 @@ int main()
   {
     cout << "Test 11 Accepted\n";
   }
-  if ((BigDecimalInt("000") - BigDecimalInt("-000100")) < BigDecimalInt("300"))
+  if ((BigDecimalInt("-000100")) < BigDecimalInt("300"))
   {
     cout << "Test 12 Accepted\n";
   }
-  if ((BigDecimalInt("000") - BigDecimalInt("-000100")) > BigDecimalInt("-1"))
+  if ((BigDecimalInt("-100")) < BigDecimalInt("-1"))
   {
     cout << "Test 13 Accepted\n";
   }
   
-  BigDecimalInt c("-2");
-  BigDecimalInt v("0");
-  cout << c + v<< '\n';
-  cout << BigDecimalInt("-777") + BigDecimalInt("-778");
+  //BigDecimalInt c("-2");
+ // BigDecimalInt v("0");
+ // cout << c + v<< '\n';
+ // cout << BigDecimalInt("-777") + BigDecimalInt("-778");
   // if (BigDecimalInt("9") == BigDecimalInt("9"))
   // {
   //     cout << "yes\n";
