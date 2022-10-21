@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <ctype.h>
-#include <stdlib.h>   
+#include <stdlib.h>
 #include <algorithm> // std::for_each
 
 using namespace std;
@@ -32,7 +32,7 @@ public:
 	BigDecimalInt operator=(BigDecimalInt secondDec);
 	int size();
 	int sign();
-	friend ostream& operator<<(ostream& out, BigDecimalInt secondDec);
+	friend ostream &operator<<(ostream &out, BigDecimalInt secondDec);
 };
 
 #endif

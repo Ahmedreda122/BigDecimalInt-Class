@@ -415,7 +415,7 @@ bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 	{
 		return false;
 	}
-	else if (secondDec.sign() && str_sign == '-')
+	else if (!secondDec.sign() && str_sign == '+')
 	{
 		return true;
 	}
