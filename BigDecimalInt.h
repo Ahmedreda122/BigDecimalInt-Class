@@ -1,3 +1,10 @@
+// FCAI – OOP – 2022 - Assignment 1
+// Program: BigDecimalInt.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Ahmad Reda Bayoumi - Esraa Mahmoud Abdelmohsen
+// IDs: 20210235 - 20210019 - 20210063
+// Date: October  2022
+// ...........................................................................................
+
 #ifndef BIGDECIMALINT_H_
 #define BIGDECIMALINT_H_
 
@@ -7,10 +14,10 @@
 #include <vector>
 #include <ctype.h>
 #include <stdlib.h>
-#include <algorithm> // std::for_each
 
 using namespace std;
 
+bool mark = true;
 class BigDecimalInt
 {
 private:
@@ -24,7 +31,6 @@ public:
 	BigDecimalInt operator+(BigDecimalInt secondDec);
 	void show();
 	string get_str();
-	// int get_int();
 	BigDecimalInt operator-(BigDecimalInt secondDec);
 	bool operator<(BigDecimalInt secondDec);
 	bool operator>(BigDecimalInt secondDec);

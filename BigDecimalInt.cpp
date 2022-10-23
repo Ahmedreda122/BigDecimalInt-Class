@@ -1,6 +1,11 @@
-#include "BigDecimalInt.h"
+// FCAI – OOP – 2022 - Assignment 1
+// Program: BigDecimalInt.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Ahmad Reda Bayoumi - Esraa Mahmoud Abdelmohsen
+// IDs: 20210235 - 20210019 - 20210063
+// Date: October  2022
+// ...........................................................................................
 
-bool mark = true;
+#include "BigDecimalInt.h"
 
 BigDecimalInt::BigDecimalInt(string decStr)
 {
@@ -402,14 +407,10 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 		}
 		else if (size1 == size2)
 		{
-			if (str_sign == '-')
-			{
-				return (str > secondDec.str);
-			}
-			else
-			{
-				return (str < secondDec.str);
-			}
+			if (num[size1 - 1] > secondDec.num[size1 - 1])
+				return false;
+			else if (num[size1 - 1] < secondDec.num[size1 - 1])
+				return true;
 		}
 	}
   return false;
@@ -418,36 +419,36 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 {
 	int NumOfDigits1 = str.size();
-	int NumOfDigits2 = secondDec.str.size();
-	if (str_sign == '-' && secondDec.str_sign == '+')
+	int NumOfDigits2 = secondDec.get_str().size();
+	if (str_sign == '-' && secondDec.sign())
 	{
 		return false;
 	}
-	else if (secondDec.str_sign == '-' && str_sign == '+')
+	else if (!secondDec.sign() && str_sign == '+')
 	{
 		return true;
 	}
-	else if ((NumOfDigits1 > NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
+	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '+' && secondDec.sign())
 	{
 		return true;
 	}
-	else if ((NumOfDigits1 < NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
+	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '+' && secondDec.sign())
 	{
 		return false;
 	}
-	else if ((NumOfDigits1 == NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
+	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '+' && secondDec.sign())
 	{
 		return (str > secondDec.get_str());
 	}
-	else if ((NumOfDigits1 > NumOfDigits2) && str_sign == '-' && secondDec.str_sign == '-')
+	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '-' && !secondDec.sign())
 	{
 		return false;
 	}
-	else if ((NumOfDigits1 < NumOfDigits2) && (str_sign == '-') && (secondDec.str_sign == '-'))
+	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '-' && !secondDec.sign())
 	{
 		return true;
 	}
-	else if ((NumOfDigits1 == NumOfDigits2) && (str_sign == '-') && (secondDec.str_sign == '-'))
+	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '-' && !secondDec.sign())
 	{
 		return (str < secondDec.get_str());
 	}

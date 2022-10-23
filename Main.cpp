@@ -1,13 +1,14 @@
+// FCAI – OOP – 2022 - Assignment 1
+// Program: BigDecimalInt.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Ahmad Reda Bayoumi - Esraa Mahmoud Abdelmohsen
+// IDs: 20210235 - 20210019 - 20210063
+// Date: October  2022
+// ...........................................................................................
+
 #include "BigDecimalInt.cpp"
 
 int main()
 {
-  // cout << "hello";
-  BigDecimalInt num1("364");
-  BigDecimalInt num2("-194");
-  BigDecimalInt num3 = num2;
-  cout << num1 - num3 << endl;
-
   if (num1.get_str() == "364")
   {
     cout << "Test 1 Accepted\n";
@@ -76,30 +77,4 @@ int main()
   {
     cout << "Test 17 Accepted\n";
   }
-  
-  //BigDecimalInt c("-2");
- // BigDecimalInt v("0");
- // cout << c + v<< '\n';
- // cout << BigDecimalInt("-777") + BigDecimalInt("-778");
-  // if (BigDecimalInt("9") == BigDecimalInt("9"))
-  // {
-  //     cout << "yes\n";
-  // }
-  // else
-  // {
-  //     cout << "No\n";
-  // // }
-  // if (BigDecimalInt("-1999") > BigDecimalInt("-74568"))
-  // {
-  //     cout << "\nbigger\n";
-  // }
-  // else
-  // {
-  //     cout << "smaller\n";
-  //}
-  // BigDecimalInt x("0");
-  // BigDecimalInt c("-789");
-  // BigDecimalInt v = c;
-  // cout << v.get_str() << '\n'<< v.size() << '\n' << v.sign();
-  // cout << '\n' << v;
 }
