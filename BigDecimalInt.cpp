@@ -414,36 +414,36 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 {
 	int NumOfDigits1 = str.size();
-	int NumOfDigits2 = secondDec.get_str().size();
-	if (str_sign == '-' && secondDec.sign())
+	int NumOfDigits2 = secondDec.str.size();
+	if (str_sign == '-' && secondDec.str_sign == '+')
 	{
 		return false;
 	}
-	else if (!secondDec.sign() && str_sign == '+')
+	else if (secondDec.str_sign == '-' && str_sign == '+')
 	{
 		return true;
 	}
-	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	else if ((NumOfDigits1 > NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
 	{
 		return true;
 	}
-	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	else if ((NumOfDigits1 < NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
 	{
 		return false;
 	}
-	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	else if ((NumOfDigits1 == NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
 	{
 		return (str > secondDec.get_str());
 	}
-	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	else if ((NumOfDigits1 > NumOfDigits2) && str_sign == '-' && secondDec.str_sign == '-')
 	{
 		return false;
 	}
-	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	else if ((NumOfDigits1 < NumOfDigits2) && (str_sign == '-') && (secondDec.str_sign == '-'))
 	{
 		return true;
 	}
-	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	else if ((NumOfDigits1 == NumOfDigits2) && (str_sign == '-') && (secondDec.str_sign == '-'))
 	{
 		return (str < secondDec.get_str());
 	}

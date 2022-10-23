@@ -68,6 +68,10 @@ int main()
   {
     cout << "Test 15 Accepted\n";
   }
+  if ((BigDecimalInt("-77")) > BigDecimalInt("-770"))
+  {
+    cout << "Test 16 Accepted\n";
+  }
   
   //BigDecimalInt c("-2");
  // BigDecimalInt v("0");
