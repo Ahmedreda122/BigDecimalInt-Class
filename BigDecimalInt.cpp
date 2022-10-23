@@ -402,10 +402,14 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 		}
 		else if (size1 == size2)
 		{
-			if (num[size1 - 1] > secondDec.num[size1 - 1])
-				return false;
-			else if (num[size1 - 1] < secondDec.num[size1 - 1])
-				return true;
+			if (str_sign == '-')
+			{
+				return (str > secondDec.str);
+			}
+			else
+			{
+				return (str < secondDec.str);
+			}
 		}
 	}
   return false;
