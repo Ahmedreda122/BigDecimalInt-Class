@@ -29,7 +29,6 @@ public:
 	BigDecimalInt(string decStr);
 	BigDecimalInt(int decInt);
 	BigDecimalInt operator+(BigDecimalInt secondDec);
-	void show();
 	string get_str();
 	BigDecimalInt operator-(BigDecimalInt secondDec);
 	bool operator<(BigDecimalInt secondDec);

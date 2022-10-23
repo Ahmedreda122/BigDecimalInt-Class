@@ -91,14 +91,6 @@ BigDecimalInt::BigDecimalInt(int decInt)
 	}
 }
 
-void BigDecimalInt::show()
-{
-	for (int i = num.size() - 1; i >= 0; --i)
-	{
-		cout << num[i];
-	}
-}
-
 string BigDecimalInt::get_str()
 {
 	return str;
@@ -407,10 +399,14 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 		}
 		else if (size1 == size2)
 		{
-			if (num[size1 - 1] > secondDec.num[size1 - 1])
-				return false;
-			else if (num[size1 - 1] < secondDec.num[size1 - 1])
-				return true;
+			if (str_sign == '-')
+			{
+				return (str > secondDec.str);
+			}
+			else
+			{
+				return (str < secondDec.str);
+			}
 		}
 	}
   return false;
@@ -419,36 +415,36 @@ bool BigDecimalInt::operator<(BigDecimalInt secondDec)
 bool BigDecimalInt::operator>(BigDecimalInt secondDec)
 {
 	int NumOfDigits1 = str.size();
-	int NumOfDigits2 = secondDec.get_str().size();
-	if (str_sign == '-' && secondDec.sign())
+	int NumOfDigits2 = secondDec.str.size();
+	if (str_sign == '-' && secondDec.str_sign == '+')
 	{
 		return false;
 	}
-	else if (!secondDec.sign() && str_sign == '+')
+	else if (secondDec.str_sign == '-' && str_sign == '+')
 	{
 		return true;
 	}
-	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	else if ((NumOfDigits1 > NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
 	{
 		return true;
 	}
-	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	else if ((NumOfDigits1 < NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
 	{
 		return false;
 	}
-	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '+' && secondDec.sign())
+	else if ((NumOfDigits1 == NumOfDigits2) && str_sign == '+' && secondDec.str_sign == '+')
 	{
 		return (str > secondDec.get_str());
 	}
-	else if (NumOfDigits1 > NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	else if ((NumOfDigits1 > NumOfDigits2) && str_sign == '-' && secondDec.str_sign == '-')
 	{
 		return false;
 	}
-	else if (NumOfDigits1 < NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	else if ((NumOfDigits1 < NumOfDigits2) && (str_sign == '-') && (secondDec.str_sign == '-'))
 	{
 		return true;
 	}
-	else if (NumOfDigits1 == NumOfDigits2 && str_sign == '-' && !secondDec.sign())
+	else if ((NumOfDigits1 == NumOfDigits2) && (str_sign == '-') && (secondDec.str_sign == '-'))
 	{
 		return (str < secondDec.get_str());
 	}

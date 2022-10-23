@@ -69,11 +69,11 @@ int main()
   {
     cout << "Test 15 Accepted\n";
   }
-  if ((BigDecimalInt("-77")) > BigDecimalInt("-770"))
+  if ((BigDecimalInt("-0077")) > BigDecimalInt("-770"))
   {
     cout << "Test 16 Accepted\n";
   }
-  if ((BigDecimalInt("-110")) < BigDecimalInt("-100"))
+  if ((BigDecimalInt("-00110")) < BigDecimalInt("-100"))
   {
     cout << "Test 17 Accepted\n";
   }
