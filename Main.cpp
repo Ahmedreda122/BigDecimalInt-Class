@@ -1,5 +1,5 @@
 // FCAI – OOP – 2022 - Assignment 1
-// Program: BigDecimalInt.cpp
+// Program: BigDecimalInt Class
 // Author: Abdallah Hussein Ibrahim Hussein - Ahmad Reda Bayoumi - Esraa Mahmoud Abdelmohsen
 // IDs: 20210235 - 20210019 - 20210063
 // Date: October  2022
