@@ -28,6 +28,8 @@ private:
 public:
 	BigDecimalInt(string decStr);
 	BigDecimalInt(int decInt);
+	// BigDecimalInt(const BigDecimalInt& buffer);
+	// BigDecimalInt(BigDecimalInt&& buffer);
 	BigDecimalInt operator+(BigDecimalInt secondDec);
 	string get_str();
 	BigDecimalInt operator-(BigDecimalInt secondDec);

@@ -9,6 +9,9 @@
 
 int main()
 {
+  BigDecimalInt num1("364");
+  BigDecimalInt num2 (-194);
+  
   if (num1.get_str() == "364")
   {
     cout << "Test 1 Accepted\n";

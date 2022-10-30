@@ -91,6 +91,22 @@ BigDecimalInt::BigDecimalInt(int decInt)
 	}
 }
 
+// BigDecimalInt::BigDecimalInt(const BigDecimalInt& buffer)
+// {
+// 	cout << "-----Copy Constructor-----";
+// 	str_sign = buffer.str_sign;
+// 	str = buffer.str;
+// 	num = buffer.num;
+// }
+
+// BigDecimalInt::BigDecimalInt(BigDecimalInt&& buffer)
+// {
+// 	cout << "-----Move Constructor-----";
+// 	this->num = move(buffer.num);
+// 	this->str = move(buffer.str);
+// 	this->str_sign = buffer.str_sign;
+// }
+
 string BigDecimalInt::get_str()
 {
 	return str;
