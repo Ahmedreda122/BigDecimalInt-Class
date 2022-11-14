@@ -30,6 +30,7 @@ BigDecimalInt::BigDecimalInt(string decStr)
 	if (decStr == "0")
 	{
 		num.push_back(0);
+		str = "0";
 		return;
 	}
 
