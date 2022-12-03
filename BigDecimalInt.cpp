@@ -1,6 +1,6 @@
 // FCAI – OOP – 2022 - Assignment 1
 // Program: BigDecimalInt Class
-// Author: Abdallah Hussein Ibrahim Hussein - Ahmad Reda Bayoumi - Esraa Mahmoud Abdelmohsen
+// Author: Abdallah Hussein Ibrahim Hussein S22 - Ahmad Reda Bayoumi S22 - Esraa Mahmoud Abdelmohsen S7
 // IDs: 20210235 - 20210019 - 20210063
 // Date: October  2022
 // ...........................................................................................
@@ -92,22 +92,6 @@ BigDecimalInt::BigDecimalInt(int decInt)
 	}
 }
 
-// BigDecimalInt::BigDecimalInt(const BigDecimalInt& buffer)
-// {
-// 	cout << "-----Copy Constructor-----";
-// 	str_sign = buffer.str_sign;
-// 	str = buffer.str;
-// 	num = buffer.num;
-// }
-
-// BigDecimalInt::BigDecimalInt(BigDecimalInt&& buffer)
-// {
-// 	cout << "-----Move Constructor-----";
-// 	this->num = move(buffer.num);
-// 	this->str = move(buffer.str);
-// 	this->str_sign = buffer.str_sign;
-// }
-
 string BigDecimalInt::get_str()
 {
 	return str;
@@ -175,8 +159,8 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 	else 
 	{
 		/*
-				-550 + 500 => 500 + -550
-				the default is str_sign == '+' && secondDec.str_sign == '-'
+			-550 + 500 => 500 + -550
+			the default is str_sign == '+' && secondDec.str_sign == '-'
 		*/
 		if (str_sign == '-' && secondDec.str_sign == '+')
 		{
@@ -190,6 +174,8 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 			secondDec.str = strTemp;
 		}
 
+		// fliping the larger number to be in first place and just adding -ve sign in the end
+		// 200 + - 500 = 500 - 200 = 300 => -300
 		if (BigDecimalInt(secondDec.get_str()) > BigDecimalInt(str))
 		{
 			vector<int> temp = num;
@@ -200,8 +186,6 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
 
 		for (int i = 0; i < size; ++i)
 		{
-			// fliping the larger number to be in first place and just adding -ve sign in the end
-			// 200 + - 500 = 500 - 200 = 300 => -300
 			if ((num[i] - secondDec.num[i]) < 0)
 			{
 				int j = i + 1;
@@ -310,7 +294,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
       // 500 -- 200
 			return BigDecimalInt(str) + BigDecimalInt(secondDec.str);
 		}
-		if (sign1 == '-' && sign2 == '-')
+		if (sign1 == '-' && sign2 == '-' )
 		{
 			isNgtiv = true;
 		}
@@ -341,7 +325,7 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt secondDec)
 		}
 		if (sign2 == '-' && sign1 == '-')
 		{
-			isNgtiv = true;
+			isNgtiv = false;
 		}
 	}
 
