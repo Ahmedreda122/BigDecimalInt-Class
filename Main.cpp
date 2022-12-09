@@ -11,7 +11,11 @@ int main()
 {
   BigDecimalInt num1("364");
   BigDecimalInt num2 (-194);
-  
+
+  // cout << num1 << " " << num2 << endl;
+  // BigDecimalInt num3 = num1 + num2;
+  // cout << num1 << " " << num2 << endl;
+
   if (num1.get_str() == "364")
   {
     cout << "Test 1 Accepted\n";
@@ -79,5 +83,21 @@ int main()
   if ((BigDecimalInt("-00110")) < BigDecimalInt("-100"))
   {
     cout << "Test 17 Accepted\n";
+  }
+  if (BigDecimalInt("600") + BigDecimalInt("-200") == BigDecimalInt("400"))
+  {
+    cout << "Test 18 Accepted\n";
+  }
+  if (BigDecimalInt("-600") + BigDecimalInt("200") == BigDecimalInt("-400"))
+  {
+    cout << "Test 19 Accepted\n";
+  }
+  if (BigDecimalInt("200") + BigDecimalInt("-600") == BigDecimalInt("-400"))
+  {
+    cout << "Test 20 Accepted\n";
+  }
+  if (BigDecimalInt("-200") + BigDecimalInt("600") == BigDecimalInt("400"))
+  {
+    cout << "Test 21 Accepted\n";
   }
 }

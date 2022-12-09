@@ -158,68 +158,67 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt secondDec)
   }
 	else 
 	{
-		/*
-			-550 + 500 => 500 + -550
-			the default is str_sign == '+' && secondDec.str_sign == '-'
-		*/
-		if (str_sign == '-' && secondDec.str_sign == '+')
+		// A copy of this->num
+		vector<int> thisNum = num;
+		// The Default is str_sign == '+' && secondDec.str_sign == '-'
+		// Fliping the larger number to be in first place and calculate the substraction
+		// -200 + 500 => 500 - 200 = 300
+		if ((str_sign == '-' && secondDec.str_sign == '+') && (BigDecimalInt(secondDec.get_str()) > BigDecimalInt(str)))
 		{
-			vector<int> temp = num;
-			string strTemp = str;
-
-			num = secondDec.num;
-			str = secondDec.str;
-
-			secondDec.num = temp;
-			secondDec.str = strTemp;
+			swap(thisNum, secondDec.num);
 		}
-
-		// fliping the larger number to be in first place and just adding -ve sign in the end
-		// 200 + - 500 = 500 - 200 = 300 => -300
-		if (BigDecimalInt(secondDec.get_str()) > BigDecimalInt(str))
+		/*
+			Just adding -ve sign in the end
+			-600 + 200 => 600 - 200 => 400 => -400
+		*/
+		else if (str_sign == '-' && secondDec.str_sign == '+') // && (BigDecimalInt(thisStr) > BigDecimalInt(secondDec.get_str()))
 		{
-			vector<int> temp = num;
-			num = secondDec.num;
-			secondDec.num = temp;
+			isNgtiv = true;
+		}
+		// Fliping the larger number to be in first place and just adding -ve sign in the end
+		// 200 + - 500 = 500 - 200 = 300 => -300
+		else if (BigDecimalInt(secondDec.get_str()) > BigDecimalInt(str)) // && (str_sign == '+' && secondDec.str_sign == '-')
+		{
+			swap(thisNum, secondDec.num);
 			isNgtiv = true;
 		}
 
 		for (int i = 0; i < size; ++i)
 		{
-			if ((num[i] - secondDec.num[i]) < 0)
+			if ((thisNum[i] - secondDec.num[i]) < 0)
 			{
 				int j = i + 1;
-        if (num[j] == 0)
+        if (thisNum[j] == 0)
         {
-          while (num[j] == 0)
+          while (thisNum[j] == 0)
           { // 3999910
-            if (num[j + 1] == 0)
+            if (thisNum[j + 1] == 0)
             {
-              num[j] = 9;
+              thisNum[j] = 9;
               ++j;
             }
             else
             {
-              num[j] = 9;
-              num[j + 1]--;
-              num[i] += 10;
-              result = to_string(num[i] - secondDec.num[i]);
+              thisNum[j] = 9;
+              thisNum[j + 1]--;
+              thisNum[i] += 10;
+              result = to_string(thisNum[i] - secondDec.num[i]);
               res[i] = stoi(result);
               break;
             }
           }
         }
-				else if (num[j] != 0)
+				else if (thisNum[j] != 0)
 				{
-					num[j]--;
-					num[i] += 10;
-					result = to_string(num[i] - secondDec.num[i]);
+					thisNum[j]--;
+					thisNum[i] += 10;
+					result = to_string(thisNum[i] - secondDec.num[i]);
 					res[i] = stoi(result);
 				}
 			}
 			else
 			{
-				result = to_string(num[i] - secondDec.num[i]);
+				result = to_string(thisNum[i] - secondDec.num[i]);
 				res[i] = stoi(result);
 			}
 		}
